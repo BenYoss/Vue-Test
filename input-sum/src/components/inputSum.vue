@@ -23,7 +23,7 @@
                   v-model="value2"
                   label="my-label"
                   >
-          <b-button @click="sums = sum(value1, value2)">Calculate Sum</b-button>
+          <b-button @click="sum">Calculate Sum</b-button>
         </label>
       </div>
     </div>
@@ -39,7 +39,9 @@ export default {
   },
   // Methods that are incorporated into the component
   methods: {
-    sum: (num1, num2) => Number(num1) + Number(num2),
+    sum() {
+      this.sums = Number(this.value1) + Number(this.value2);
+    },
   },
   // The list of declared/initialized vue variables
   data() {
