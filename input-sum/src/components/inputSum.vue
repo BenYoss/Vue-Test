@@ -44,6 +44,8 @@ export default {
   // The list of declared/initialized vue variables
   data() {
     return {
+      value2: null,
+      value1: null,
       sums: 0,
     };
   },
