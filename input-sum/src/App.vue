@@ -1,30 +1,38 @@
 <template>
   <div class="app-container">
-    <InputSum />
+    <!-- <div class="app-header">
+      <NavBar :title="title" />
+    </div> -->
+    <router-view />
+    <div id="project-container">
+      <!-- <TodoList /> -->
+    </div>
+    <div id="project-container">
+      <!-- <InputSum /> -->
+    </div>
   </div>
 </template>
 
 <script>
-import InputSum from './components/inputSum.vue';
+// import InputSum from './components/inputSum/inputSum.vue';
+// import TodoList from './components/todoList/todoList.vue';
+// import NavBar from './components/todoList/navBar.vue';
 
 export default {
   name: 'App',
-  components: {
-    InputSum,
+  // components: {
+  //   InputSum,
+  //   TodoList,
+  // },
+  data() {
+    return {
+      title: 'Input-sum',
+    };
   },
 };
 </script>
 
-<style lang="css">
-body {
-  background-color: rgb(20, 20, 27);
-  width: 100vw;
-  height: 100vh;
-  overflow: hidden;
-}
-::-webkit-scrollbar {
-    display: none;
-}
+<style lang="scss">
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -32,5 +40,16 @@ body {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+  box-shadow: 5px 5px 15px 5px rgb(0 0 0 / 30%);
+}
+html {
+  font-family: 'Inter', sans-serif;
+}
+body {
+  height: 100vh;
+}
+.project-container {
+  display: flex;
+  justify-content: center;
 }
 </style>
