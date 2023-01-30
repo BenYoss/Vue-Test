@@ -56,6 +56,14 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
+::-webkit-scrollbar {
+    display: none;
+}
+body {
+  background-color: rgb(20, 20, 27);
+  width: 100vw;
+  height: 100vh;
+}
 $gap-width: 100px;
 .equation-visual {
   display: flex;
