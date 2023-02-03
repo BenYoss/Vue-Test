@@ -7,7 +7,11 @@
         <InputBar
         @inputvalue="addToList"
         :inputValue="inputValue" :addToList="addToList" />
-        <List @activetasks="updateTaskCount" :listContainer="listContainer" />
+        <List
+        @activetasks="updateTaskCount"
+        :listContainer="listContainer"
+        @delete="deleteFromList"
+        />
     </div>
 </div>
 </template>
@@ -33,7 +37,12 @@ export default {
         alert('Please enter a task first.');
       }
     },
-    deleteFromList() {
+    deleteFromList(id) {
+      if (id) {
+        this.listContainer.splice(id, 1);
+      } else {
+        alert('Unsufficient deletion permissions.');
+      }
       return true;
     },
     checkDone() {
