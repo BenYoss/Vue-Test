@@ -45,9 +45,6 @@ export default {
 html {
   font-family: 'Inter', sans-serif;
 }
-body {
-  height: 100vh;
-}
 .project-container {
   display: flex;
   justify-content: center;

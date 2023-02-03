@@ -2,8 +2,6 @@
 <div class="todolist-container">
     <div class="todolist-header">
         <NavBar :title="title" :activeTasks="listContainer.length" />
-        {{title}}
-        {{listContainer}}
     </div>
     <div class="todo-list-body">
         <InputBar
@@ -15,6 +13,7 @@
 </template>
 
 <script>
+
 import InputBar from './inputBar.vue';
 import NavBar from './navBar.vue';
 import List from './list.vue';
@@ -56,11 +55,16 @@ export default {
   },
 };
 </script>
+<style scoped lang="css">
+  body {
+    background-color: white !important;
+  }
+</style>
 
 <style lang="scss">
     body {
-      background-color: white;
       overflow: hidden;
+      height: 100vh;
     }
     .todolist-container {
         margin: 6vh 21vw 6vh 21vw;

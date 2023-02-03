@@ -1,22 +1,22 @@
 <template>
   <div class="app-container">
     <div id="project-container">
-      <TodoList />
+      <Todo />
     </div>
   </div>
 </template>
 
 <script>
-import TodoList from '../../components/todoList/todoList.vue';
+import Todo from '../../components/todoList/todoList.vue';
 
 export default {
-  name: 'TodoList',
+  name: 'todo-list',
   components: {
-    TodoList,
+    Todo,
   },
   data() {
     return {
-      title: 'Input-sum',
+      title: 'todo-list',
     };
   },
 };

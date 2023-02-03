@@ -1,9 +1,8 @@
 import Router from 'vue-router';
 import Vue from 'vue';
 
-import InputSum from '../components/inputSum/inputSum.vue';
+import InputSum from '../layout/InputSum/InputSum.vue';
 import TodoList from '../layout/todoList/TodoList.vue';
-// import TodoList from '../components/todoList/todoList.vue';
 
 Vue.use(Router);
 
@@ -13,7 +12,7 @@ export default new Router({
   hash: false,
   routes: [
     {
-      path: '/',
+      path: '/input',
       name: 'input_sum',
       component: InputSum,
     },
