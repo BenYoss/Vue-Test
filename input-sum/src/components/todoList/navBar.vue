@@ -55,8 +55,12 @@ export default {
     #date {
         font-weight:500;
     }
-    .router-select:hover {
+    .router-select {
         color: rgba(255, 255, 255, 0.447);
+        cursor: pointer;
+    }
+    .router-select:hover {
+        color: rgba(255, 255, 255, 0.892);
         cursor: pointer;
     }
     .router-select:active {
