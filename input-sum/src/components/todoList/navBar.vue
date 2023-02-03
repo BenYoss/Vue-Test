@@ -1,6 +1,5 @@
 <template>
     <div class="navbar-container">
-        <!-- <h2 id="title">Todo List</h2> -->
         <div class="column-block">
             <h2 id="date">{{dateMarker}}</h2>
             <span v-if="activeTasks >= 0">
