@@ -3,10 +3,11 @@
         <!-- <h2 id="title">Todo List</h2> -->
         <div class="column-block">
             <h2 id="date">{{dateMarker}}</h2>
-            <h4 id="active-tasks">{{activeTasks}} Active Tasks</h4>
+            <span v-if="activeTasks >= 0">
+              <h4 id="active-tasks">{{activeTasks}} Active Tasks</h4>
+            </span>
         </div>
         <div class="nav-links">
-            something
             <router-link :to="{ name: 'input_sum' }" class="router-select">Input Sum</router-link>
             <router-link :to="{ name: 'todo_list' }"  class="router-select">Todo List</router-link>
         </div>

@@ -1,7 +1,10 @@
 <template>
   <div class="input-sum-container">
-    <div class="input-sum-header">
+    <div class="input-sum-title">
       <h2 id="title">Input Sum</h2>
+    </div>
+    <div class="input-sum-header">
+      <NavBar :title="title" :activeTasks="-1" />
     </div>
     <div class="input-sum-body">
       <div class="equation-visual">
@@ -31,9 +34,13 @@
 </template>
 
 <script>
+import NavBar from '../todoList/navBar.vue';
 
 export default {
   name: 'input-sum',
+  components: {
+    NavBar,
+  },
   props: {
     input: String,
   },
@@ -55,7 +62,7 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped lang="scss">
+<style lang="scss">
 ::-webkit-scrollbar {
     display: none;
 }
@@ -76,6 +83,11 @@ $gap-width: 100px;
   height: fit-content;
   filter: invert(1);
 }
+.input-sum-title {
+  font-size: 8vh;
+  color: white;
+  font-weight: bolder;
+}
 .input-sum-container {
   display: flex;
   background-color: rgb(27, 28, 44);
@@ -92,8 +104,9 @@ $gap-width: 100px;
 }
 .input-sum-header {
   color: white;
-  font-weight: bolder;
-  font-size: 7vh;
+  font-size: 1.8vh;
+  transform: scale(2);
+  width: 50vw;
 }
 .input-sum-input-box {
   display: flex;
