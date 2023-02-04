@@ -8,10 +8,17 @@
         @inputvalue="addToList"
         :inputValue="inputValue" :addToList="addToList" />
         <List
+        v-if="!$route.meta.taskTypeComplete"
         @activetasks="updateTaskCount"
         :listContainer="listContainer"
         @delete="deleteFromList"
         />
+        <span v-if="$route.meta.taskTypeComplete">
+          <CompletedList
+          :completedListContainer="completedListContainer"
+          @incomplete="checkDone"
+          />
+        </span>
     </div>
 </div>
 </template>
@@ -21,6 +28,7 @@
 import InputBar from './inputBar.vue';
 import NavBar from './navBar.vue';
 import List from './list.vue';
+import CompletedList from './CompletedList.vue';
 
 export default {
   name: 'TodoList',
@@ -28,6 +36,7 @@ export default {
     InputBar,
     NavBar,
     List,
+    CompletedList,
   },
   methods: {
     addToList(text) {
@@ -43,10 +52,13 @@ export default {
       } else {
         alert('Unsufficient deletion permissions.');
       }
-      return true;
     },
-    checkDone() {
-      return true;
+    checkDone(response) {
+      if (response.isDone) {
+        this.completedListContainer.push(this.listContainer[response.index]);
+      } else {
+        this.listContainer.push(this.completedListContainer[response.index]);
+      }
     },
     dateParser() {
       return true;
@@ -55,6 +67,7 @@ export default {
   data() {
     return {
       listContainer: ['Example', 'Design application interface.'],
+      completedListContainer: ['I am complete!'],
       inputValue: null,
       isChecked: false,
       isDeleted: false,
@@ -64,11 +77,6 @@ export default {
   },
 };
 </script>
-<style scoped lang="css">
-  body {
-    background-color: white !important;
-  }
-</style>
 
 <style lang="scss">
     body {

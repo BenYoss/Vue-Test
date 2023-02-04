@@ -1,9 +1,11 @@
 <template>
     <div class="list-container">
-        <div class="list" v-for="item in listContainer" :key="item">
+        <div class="list" v-for="item in completedListContainer" :key="item.id">
             <div class="list-item-container">
               <h2 class="list-item">{{item}}</h2>
-              <b-button id="delete-btn" @click="$emit('delete', item)">Delete Me</b-button>
+              <b-button
+              id="delete-btn"
+              @click="$emit('incomplete', {isDone: false, text})">Move To Open</b-button>
             </div>
         </div>
     </div>
@@ -11,16 +13,9 @@
 
 <script>
 export default {
-  name: 'list-items',
+  name: 'completed-items',
   props: {
-    listContainer: Array,
-  },
-  mounted() {
-    this.$nextTick(() => {
-      if (this.listContainer) {
-        this.$emit('activetasks', this.listContainer.length);
-      }
-    });
+    completedListContainer: Array,
   },
   methods: {
   },

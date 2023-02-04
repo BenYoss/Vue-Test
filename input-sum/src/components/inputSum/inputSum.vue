@@ -67,7 +67,6 @@ export default {
     display: none;
 }
 body {
-  background-color: rgb(20, 20, 27);
   width: 100vw;
   height: 100vh;
 }
@@ -123,8 +122,5 @@ ul {
 li {
   display: inline-block;
   margin: 0 10px;
-}
-a {
-  color: #42b983;
 }
 </style>

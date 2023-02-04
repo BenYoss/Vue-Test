@@ -15,11 +15,27 @@ export default new Router({
       path: '/input',
       name: 'input_sum',
       component: InputSum,
+      meta: {
+        color: 'rgb(20, 20, 27)',
+      },
     },
     {
       path: '/todo',
       name: 'todo_list',
       component: TodoList,
+      meta: {
+        color: 'white',
+        taskTypeComplete: false,
+      },
+    },
+    {
+      path: '/todo-complete',
+      name: 'todo_list_complete',
+      component: TodoList,
+      meta: {
+        color: 'white',
+        taskTypeComplete: true,
+      },
     },
   ],
 });

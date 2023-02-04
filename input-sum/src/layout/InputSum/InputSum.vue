@@ -24,7 +24,6 @@ export default {
 
 <style lang="scss">
 body {
-  background-color: rgb(20, 20, 27) !important;
   width: 100vw;
 }
 </style>

@@ -7,8 +7,13 @@
             </span>
         </div>
         <div class="nav-links">
-            <router-link :to="{ name: 'input_sum' }" class="router-select">Input Sum</router-link>
-            <router-link :to="{ name: 'todo_list' }"  class="router-select">Todo List</router-link>
+            <router-link :to="{ name: 'input_sum' }">Input Sum</router-link>
+            <router-link :to="{ name: 'todo_list' }">Todo List</router-link>
+            <router-link
+            v-if="url"
+            :to="{
+              name: 'todo_list_complete'
+            }">Completed Tasks</router-link>
         </div>
     </div>
 </template>
@@ -20,7 +25,7 @@ export default {
     activeTasks: Number,
     title: String,
   },
-  mounted() {
+  created() {
     this.dateParser();
   },
   methods: {
@@ -33,6 +38,7 @@ export default {
   data() {
     return {
       dateMarker: new Date(Date.now()),
+      url: window.location.href.includes('todo'),
     };
   },
 };
@@ -69,6 +75,17 @@ export default {
         color: #61DBFB;
         font-size: 1.7vh;
     }
+    .router-link-exact-active {
+        color: rgba(255, 255, 255, 0.892) !important;
+    }
+    a:hover {
+        color: rgba(255, 255, 255, 0.892);
+        cursor: pointer;
+    }
+    a {
+        color: rgba(255, 255, 255, 0.447) !important;
+        text-decoration: none;
+    }
     .column-block {
         // @include navbar-padding();
         display: flex;
@@ -77,6 +94,6 @@ export default {
     .nav-links {
         display: flex;
         justify-content: space-between;
-        width: 20%;
+        width: 40vh;
     }
 </style>
