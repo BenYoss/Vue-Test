@@ -1,29 +1,13 @@
 <template>
   <div class="app-container">
-    <!-- <div class="app-header">
-      <NavBar :title="title" />
-    </div> -->
     <router-view />
-    <div id="project-container">
-      <!-- <TodoList /> -->
-    </div>
-    <div id="project-container">
-      <!-- <InputSum /> -->
-    </div>
   </div>
 </template>
 
 <script>
-// import InputSum from './components/inputSum/inputSum.vue';
-// import TodoList from './components/todoList/todoList.vue';
-// import NavBar from './components/todoList/navBar.vue';
 
 export default {
   name: 'App',
-  // components: {
-  //   InputSum,
-  //   TodoList,
-  // },
   data() {
     return {
       title: 'Input-sum',

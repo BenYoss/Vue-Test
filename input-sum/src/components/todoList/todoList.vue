@@ -1,7 +1,10 @@
 <template>
 <div class="todolist-container">
     <div class="todolist-header">
-        <NavBar :title="title" :activeTasks="listContainer.length" />
+        <NavBar
+        :title="title"
+        :activeTasks="$store.todoList.listContainer.length"
+        :pageName="'todo'" />
     </div>
     <div class="todo-list-body">
         <InputBar
@@ -10,12 +13,13 @@
         <List
         v-if="!$route.meta.taskTypeComplete"
         @activetasks="updateTaskCount"
-        :listContainer="listContainer"
+        :listContainer="$store.todoList.listContainer"
         @delete="deleteFromList"
+        @incomplete="checkDone"
         />
         <span v-if="$route.meta.taskTypeComplete">
           <CompletedList
-          :completedListContainer="completedListContainer"
+          :completedListContainer="$store.todoList.completedListContainer"
           @incomplete="checkDone"
           />
         </span>
@@ -41,23 +45,26 @@ export default {
   methods: {
     addToList(text) {
       if (text) {
-        this.listContainer.push(text);
+        this.$store.todoList.listContainer.push(text);
       } else {
         alert('Please enter a task first.');
       }
     },
-    deleteFromList(id) {
-      if (id) {
-        this.listContainer.splice(id, 1);
+    deleteFromList(text) {
+      if (text) {
+        const index = this.$store.todoList.listContainer.indexOf(text);
+        this.$store.todoList.listContainer.splice(index, 1);
       } else {
         alert('Unsufficient deletion permissions.');
       }
     },
     checkDone(response) {
       if (response.isDone) {
-        this.completedListContainer.push(this.listContainer[response.index]);
+        this.$store.todoList.completedListContainer.push(response.item);
+        this.$store.todoList.listContainer.splice(response.index, 1);
       } else {
-        this.listContainer.push(this.completedListContainer[response.index]);
+        this.$store.todoList.listContainer.push(response.item);
+        this.$store.todoList.completedListContainer.splice(response.index, 1);
       }
     },
     dateParser() {
@@ -66,8 +73,6 @@ export default {
   },
   data() {
     return {
-      listContainer: ['Example', 'Design application interface.'],
-      completedListContainer: ['I am complete!'],
       inputValue: null,
       isChecked: false,
       isDeleted: false,
@@ -79,10 +84,6 @@ export default {
 </script>
 
 <style lang="scss">
-    body {
-      overflow: hidden;
-      height: 100vh;
-    }
     .todolist-container {
         margin: 6vh 21vw 6vh 21vw;
         background-color: #393F49;

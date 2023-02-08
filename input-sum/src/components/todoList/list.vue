@@ -1,9 +1,13 @@
 <template>
     <div class="list-container">
-        <div class="list" v-for="item in listContainer" :key="item">
+        <div class="list" v-for="(item, index) in $store.todoList.listContainer" :key="item">
             <div class="list-item-container">
               <h2 class="list-item">{{item}}</h2>
-              <b-button id="delete-btn" @click="$emit('delete', item)">Delete Me</b-button>
+              <div class="list-item-btns">
+                <b-button id="delete-btn" @click="$emit('delete', item)">Delete Me</b-button>
+                <b-button id="check-btn" @click="$emit('incomplete',
+                {isDone: true, item, index})">Mark as Complete</b-button>
+              </div>
             </div>
         </div>
     </div>
@@ -17,8 +21,8 @@ export default {
   },
   mounted() {
     this.$nextTick(() => {
-      if (this.listContainer) {
-        this.$emit('activetasks', this.listContainer.length);
+      if (this.$store.todoList.listContainer) {
+        this.$emit('activetasks', this.$store.todoList.listContainer.length);
       }
     });
   },
@@ -52,6 +56,17 @@ export default {
     font-size: 1.6vh;
     background-color: rgb(214, 110, 110);
     color: white;
+  }
+  #check-btn {
+    font-size: 1.6vh;
+    background-color: rgb(58, 144, 62);
+    color: white;
+  }
+  .list-item-btns {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    width: 15vw;
   }
   .list-container {
     height: 63vh;

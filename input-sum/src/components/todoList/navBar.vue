@@ -6,7 +6,7 @@
               <h4 id="active-tasks">{{activeTasks}} Active Tasks</h4>
             </span>
         </div>
-        <div class="nav-links">
+        <div :class="'nav-links-' + pageName">
             <router-link :to="{ name: 'input_sum' }">Input Sum</router-link>
             <router-link :to="{ name: 'todo_list' }">Todo List</router-link>
             <router-link
@@ -24,6 +24,7 @@ export default {
   props: {
     activeTasks: Number,
     title: String,
+    pageName: String,
   },
   created() {
     this.dateParser();
@@ -44,10 +45,14 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" >
     @mixin navbar-padding {
         display: flex;
         padding: 3% 5% 0 5%;
+    }
+    @mixin nav-links-default {
+        display: flex;
+        justify-content: space-between;
     }
     .navbar-container {
       @include navbar-padding();
@@ -56,6 +61,14 @@ export default {
       color: white;
       width: 100%;
       height: 100%;
+    }
+    body {
+      &:has(.nav-links-todo) {
+        background-color: white;
+      }
+      &:has(.nav-links-input-sum) {
+        background-color: rgb(36, 36, 46) !important;
+      }
     }
     #date {
         font-weight:500;
@@ -87,13 +100,15 @@ export default {
         text-decoration: none;
     }
     .column-block {
-        // @include navbar-padding();
         display: flex;
         flex-direction: column;
     }
-    .nav-links {
-        display: flex;
-        justify-content: space-between;
-        width: 40vh;
+    .nav-links-todo {
+      @include nav-links-default();
+      width: 40vh;
+    }
+    .nav-links-input-sum {
+      @include nav-links-default();
+      width: 20vh;
     }
 </style>

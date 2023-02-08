@@ -4,7 +4,7 @@
       <h2 id="title">Input Sum</h2>
     </div>
     <div class="input-sum-header">
-      <NavBar :title="title" :activeTasks="-1" />
+      <NavBar :title="title" :activeTasks="-1" :pageName="'input-sum'" />
     </div>
     <div class="input-sum-body">
       <div class="equation-visual">
@@ -63,6 +63,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss">
+$test: 1;
 ::-webkit-scrollbar {
     display: none;
 }

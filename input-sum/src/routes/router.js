@@ -12,7 +12,7 @@ export default new Router({
   hash: false,
   routes: [
     {
-      path: '/input',
+      path: '/',
       name: 'input_sum',
       component: InputSum,
       meta: {

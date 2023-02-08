@@ -21,9 +21,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss">
-body {
-  width: 100vw;
-}
-</style>
