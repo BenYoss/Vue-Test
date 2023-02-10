@@ -12,7 +12,7 @@
         <h1 id="equation-value">+</h1>
         <h1 id="equation-value">{{ value2 || 0 }}</h1>
         <h1 id="equation-value">=</h1>
-        <h1 id="equation-value">{{ sums || 0 }}</h1>
+        <h1 id="equation-value">{{ sum || 0 }}</h1>
       </div>
       <div class="input-sum-input-box">
         <label for="form" class="input-sum-input-box">
@@ -26,7 +26,6 @@
                   v-model="value2"
                   label="my-label"
                   >
-          <b-button @click="sum">Calculate Sum</b-button>
         </label>
       </div>
     </div>
@@ -44,12 +43,6 @@ export default {
   props: {
     input: String,
   },
-  // Methods that are incorporated into the component
-  methods: {
-    sum() {
-      this.sums = Number(this.value1) + Number(this.value2);
-    },
-  },
   // The list of declared/initialized vue variables
   data() {
     return {
@@ -58,12 +51,16 @@ export default {
       sums: 0,
     };
   },
+  computed: {
+    sum() {
+      return Number(this.value1) + Number(this.value2);
+    },
+  },
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss">
-$test: 1;
 ::-webkit-scrollbar {
     display: none;
 }
@@ -112,6 +109,8 @@ $gap-width: 100px;
   display: flex;
   flex-direction: row;
   column-gap: $gap-width;
+  padding-top: 20px;
+  transform: scale(1.3);
 }
 h3 {
   margin: 40px 0 0;
