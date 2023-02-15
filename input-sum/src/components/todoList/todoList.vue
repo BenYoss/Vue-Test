@@ -2,25 +2,19 @@
 <div class="todolist-container">
     <div class="todolist-header">
         <NavBar
+        :activeTasks="this.$store.state.listContainer.length"
         :title="title"
-        :activeTasks="$store.todoList.listContainer.length"
         :pageName="'todo'" />
     </div>
     <div class="todo-list-body">
-        <InputBar
-        @inputvalue="addToList"
-        :inputValue="inputValue" :addToList="addToList" />
+        <InputBar />
         <List
         v-if="!$route.meta.taskTypeComplete"
-        @activetasks="updateTaskCount"
-        :listContainer="$store.todoList.listContainer"
-        @delete="deleteFromList"
-        @incomplete="checkDone"
+        v-on:update="updateCachedState"
         />
         <span v-if="$route.meta.taskTypeComplete">
           <CompletedList
-          :completedListContainer="$store.todoList.completedListContainer"
-          @incomplete="checkDone"
+          v-on:update="updateCachedState"
           />
         </span>
     </div>
@@ -28,7 +22,7 @@
 </template>
 
 <script>
-
+import { mapMutations, mapState } from 'vuex';
 import InputBar from './inputBar.vue';
 import NavBar from './navBar.vue';
 import List from './list.vue';
@@ -43,33 +37,22 @@ export default {
     CompletedList,
   },
   methods: {
-    addToList(text) {
-      if (text) {
-        this.$store.todoList.listContainer.push(text);
-      } else {
-        alert('Please enter a task first.');
-      }
-    },
-    deleteFromList(text) {
-      if (text) {
-        const index = this.$store.todoList.listContainer.indexOf(text);
-        this.$store.todoList.listContainer.splice(index, 1);
-      } else {
-        alert('Unsufficient deletion permissions.');
-      }
-    },
-    checkDone(response) {
-      if (response.isDone) {
-        this.$store.todoList.completedListContainer.push(response.item);
-        this.$store.todoList.listContainer.splice(response.index, 1);
-      } else {
-        this.$store.todoList.listContainer.push(response.item);
-        this.$store.todoList.completedListContainer.splice(response.index, 1);
-      }
-    },
     dateParser() {
       return true;
     },
+    updateCachedState() {
+      const localListContainer = [];
+      if (localStorage.getItem('store')) {
+        localListContainer.push(...JSON.parse(localStorage.getItem('store')).listContainer);
+      }
+      localStorage.setItem('store', JSON.stringify({
+        listContainer: [...localListContainer],
+        completedListContainer: this.$store.state.completedListContainer,
+      }));
+    },
+    ...mapMutations([
+      'checkDone',
+    ]),
   },
   data() {
     return {
@@ -80,6 +63,9 @@ export default {
       title: 'title',
     };
   },
+  computed: mapState([
+    'listContainer',
+  ]),
 };
 </script>
 

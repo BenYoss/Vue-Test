@@ -1,12 +1,15 @@
 <template>
     <div class="list-container">
-        <div class="list" v-for="(item, index) in $store.todoList.listContainer" :key="item">
+        <div class="list" v-for="(item, index) in $store.state.listContainer" :key="item">
             <div class="list-item-container">
               <h2 class="list-item">{{item}}</h2>
               <div class="list-item-btns">
-                <b-button id="delete-btn" @click="$emit('delete', item)">Delete Me</b-button>
-                <b-button id="check-btn" @click="$emit('incomplete',
-                {isDone: true, item, index})">Mark as Complete</b-button>
+                <b-button id="delete-btn"
+                @click="$store.commit('deleteFromList', item)">Delete Me</b-button>
+                <b-button id="check-btn"
+                @click="$store.commit('checkDone',
+                {isDone: true, item, index}
+                )">Mark as Complete</b-button>
               </div>
             </div>
         </div>
@@ -14,25 +17,31 @@
 </template>
 
 <script>
+import { mapState, mapMutations } from 'vuex';
+
 export default {
   name: 'list-items',
-  props: {
-    listContainer: Array,
-  },
   mounted() {
     this.$nextTick(() => {
-      if (this.$store.todoList.listContainer) {
-        this.$emit('activetasks', this.$store.todoList.listContainer.length);
+      if (this.$store.listContainer) {
+        this.$store.commit('checkDone', this.$store.listContainer.length);
       }
     });
   },
   methods: {
+    ...mapMutations([
+      'deleteFromList',
+      'checkDone',
+    ]),
   },
   data() {
     return {
       item: '',
     };
   },
+  computed: mapState([
+    'listContainer',
+  ]),
 };
 </script>
 

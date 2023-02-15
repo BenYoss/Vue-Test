@@ -9,15 +9,23 @@
                 label="task-input"
                 id="strd-input"
                 />
-            <b-button id="styled-btn" @click="$emit('inputvalue', value)">Add Task</b-button>
+            <b-button id="styled-btn"
+            @click="$store.commit('addToList', value)">Add Task</b-button>
         </form>
     </div>
 </template>
 
 <script>
+import { mapMutations } from 'vuex';
+
 export default {
   name: 'input-bar',
   props: {
+  },
+  methods: {
+    ...mapMutations([
+      'addToList',
+    ]),
   },
   data() {
     return {

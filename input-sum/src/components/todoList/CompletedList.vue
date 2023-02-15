@@ -1,29 +1,36 @@
 <template>
     <div class="list-container">
-        <div class="list" v-for="(item, index) in completedListContainer" :key="item.id">
+        <div class="list"
+        v-for="(item, index) in $store.state.completedListContainer" :key="item.id">
             <div class="list-item-container">
               <h2 class="list-item">{{item}}</h2>
               <b-button
               id="delete-btn"
-              @click="$emit('incomplete', {isDone: false, item, index})">Move To Open</b-button>
+              @click="
+              $store.commit('checkDone', {isDone: false, item, index})">Move To Open</b-button>
             </div>
         </div>
     </div>
 </template>
 
 <script>
+import { mapState, mapMutations } from 'vuex';
+
 export default {
   name: 'completed-items',
-  props: {
-    completedListContainer: Array,
-  },
   methods: {
+    ...mapMutations([
+      'checkDone',
+    ]),
   },
   data() {
     return {
       item: '',
     };
   },
+  computed: mapState([
+    'completedListContainer',
+  ]),
 };
 </script>
 
