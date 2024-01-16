@@ -11,7 +11,9 @@
     "buefy": "^0.9.22",
     "core-js": "^3.8.3",
     "vue": "^2.7",
-    "vue-svg-loader": "^0.16.0"
+    "vue-router": "^3.6.5",
+    "vue-svg-loader": "^0.16.0",
+    "vuex": "^3.6.2"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",

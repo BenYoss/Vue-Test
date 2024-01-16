@@ -1,30 +1,21 @@
 <template>
   <div class="app-container">
-    <InputSum />
+    <router-view />
   </div>
 </template>
 
 <script>
-import InputSum from './components/inputSum.vue';
-
 export default {
   name: 'App',
-  components: {
-    InputSum,
+  data() {
+    return {
+      title: 'Input-sum',
+    };
   },
 };
 </script>
 
-<style lang="css">
-body {
-  background-color: rgb(20, 20, 27);
-  width: 100vw;
-  height: 100vh;
-  overflow: hidden;
-}
-::-webkit-scrollbar {
-    display: none;
-}
+<style lang="scss">
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -32,5 +23,13 @@ body {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+  box-shadow: 5px 5px 15px 5px rgb(0 0 0 / 30%);
+}
+html {
+  font-family: 'Inter', sans-serif;
+}
+.project-container {
+  display: flex;
+  justify-content: center;
 }
 </style>
